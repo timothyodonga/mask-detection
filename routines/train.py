@@ -2,6 +2,7 @@ import torch
 import torch.utils.data
 import time
 from .test import test_classify
+import numpy as np
 
 
 def train(
@@ -17,7 +18,7 @@ def train(
 ):
     model.train()
 
-    min_loss = 100
+    min_loss = np.inf
 
     for epoch in range(numEpochs):
         avg_loss = 0.0
@@ -58,7 +59,8 @@ def train(
 
             print("Epoch:", epoch)
             print(
-                "Train Loss: {:.4f}\tTrain Accuracy: {:.4f}\tVal Loss: {:.4f}\tVal Accuracy: {:.4f}".format(
+                """Train Loss: {:.4f}\tTrain Accuracy: {:.4f} \t
+                    Val Loss: {:.4f}\t  Val Accuracy: {:.4f}""".format(
                     train_loss, train_acc, val_loss, val_acc
                 )
             )
