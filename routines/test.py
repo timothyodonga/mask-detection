@@ -28,3 +28,22 @@ def test_classify(model, test_loader, device, criterion):
 
     model.train()
     return np.mean(test_loss), accuracy / total
+
+
+def test_model(model, test_loader, device):
+
+    # final_output = []
+
+    with torch.no_grad():
+        model.eval()
+        model.to(device)
+
+        for batch_num, feats in enumerate(test_loader):
+            feats = feats.to(device)
+            outputs = model(feats)
+            m = torch.nn.Softmax(dim=1)
+            prob = m(outputs)
+
+            # final_output.append(prob.cpu().numpy())
+
+        return prob.cpu().numpy()
