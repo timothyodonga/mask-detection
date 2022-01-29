@@ -1,10 +1,7 @@
-import csv
 import os
-import numpy as np
 import torch
 import torch.utils.data
 from PIL import Image
-import torchvision
 
 
 class MyDataset(torch.utils.data.Dataset):
@@ -17,7 +14,7 @@ class MyDataset(torch.utils.data.Dataset):
         return len(self.img_list)
 
     def __getitem__(self, idx):
-        raise NotImplemented
+        raise NotImplementedError
 
 
 class TrainDataset(MyDataset):
@@ -47,4 +44,3 @@ class TestDataset(MyDataset):
             img = self.transforms(img)
 
         return img
-

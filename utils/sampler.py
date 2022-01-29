@@ -1,6 +1,5 @@
 import numpy as np
 from torch.utils.data.sampler import SubsetRandomSampler
-import random
 
 
 def get_random_subset_sampler(len_train_data, valid_size=0.2):

@@ -3,11 +3,12 @@ from utils.transforms import get_transform
 from utils.sampler import get_random_subset_sampler
 from torch.utils.data import DataLoader
 from model.resnet import model_conv
-from config import *
 from routines.train import train
 from routines.test import test_model
 import sys
 import pandas as pd
+from config import numEpochs, criterion, lr_scheduler, device, optimizer
+import torch
 
 image_dir = sys.argv[1]
 data = sys.argv[2]
@@ -16,7 +17,7 @@ test_data = sys.argv[3]
 
 # Load model from previous training
 load_flag = False
-if load_flag == True:
+if load_flag:
     model_conv.load_state_dict(torch.load("resnet_v2.pth"))
 
 print(model_conv)

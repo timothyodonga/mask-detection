@@ -1,10 +1,5 @@
-import csv
-import os
-import numpy as np
 import torch
 import torch.utils.data
-from PIL import Image
-import torchvision
 import time
 from .test import test_classify
 
