@@ -1,2 +1,4 @@
 *.ipynb
 .vscode/
+data/*
+debug.*
