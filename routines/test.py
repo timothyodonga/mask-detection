@@ -47,3 +47,4 @@ def test_model(model, test_loader, device):
             # final_output.append(prob.cpu().numpy())
 
         return prob.cpu().numpy()
+    # return final_output

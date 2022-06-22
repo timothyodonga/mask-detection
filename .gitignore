@@ -2,3 +2,8 @@
 .vscode/
 data/*
 debug.*
+*/__pycache__
+*/*.pyc
+*.pyc
+*.pth
+debug_*

@@ -17,7 +17,6 @@ def train(
     task="Classification",
 ):
     model.train()
-
     min_loss = np.inf
 
     for epoch in range(numEpochs):
@@ -38,7 +37,7 @@ def train(
 
             avg_loss += loss.item()
 
-            if batch_num % 1000 == 990:
+            if batch_num % 1000 == 999:
                 print(
                     "Epoch: {}\tBatch: {}\tAvg-Loss: {:.4f}".format(
                         epoch + 1, batch_num + 1, avg_loss / 1000
@@ -52,14 +51,14 @@ def train(
             del loss
 
         if task == "Classification":
-            val_loss, val_acc = test_classify(model, test_loader)
-            train_loss, train_acc = test_classify(model, data_loader)
+            val_loss, val_acc = test_classify(model, test_loader, device, criterion)
+            train_loss, train_acc = test_classify(model, data_loader, device, criterion)
 
             end_time = time.time()
 
             print("Epoch:", epoch)
             print(
-                """Train Loss: {:.4f}\tTrain Accuracy: {:.4f} \t
+                """Train Loss: {:.4f}\tTrain Accuracy: {:.4f}
                     Val Loss: {:.4f}\t  Val Accuracy: {:.4f}""".format(
                     train_loss, train_acc, val_loss, val_acc
                 )

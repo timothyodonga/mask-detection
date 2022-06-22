@@ -38,7 +38,10 @@ class TestDataset(MyDataset):
         super().__init__(root, img_list, transforms)
 
     def __getitem__(self, idx):
-        img_path = os.path.join(self.root, self.img_list[idx][0])
+        print(self.root)
+        print(self.img_list["image"][idx])
+
+        img_path = os.path.join(self.root, self.img_list["image"][idx])
         img = Image.open(img_path).convert("RGB")
 
         if self.transforms is not None:
