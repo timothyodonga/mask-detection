@@ -27,5 +27,4 @@ lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
     optimizer, mode="min", factor=0.1, patience=5
 )
 
-
 numEpochs = 50
