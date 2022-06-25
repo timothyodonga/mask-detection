@@ -1,6 +1,21 @@
 import torch
 from model.resnet import model_conv
 import torch.nn as nn
+import yaml
+import os
+
+# folder to load config file
+CONFIG_PATH = "config"
+
+
+def load_config(config_name):
+    with open(os.path.join(CONFIG_PATH, config_name)) as file:
+        config = yaml.safe_load(file)
+
+    return config
+
+
+config = load_config("config.yaml")
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -20,11 +35,16 @@ criterion = nn.CrossEntropyLoss()
 # Observe that only parameters of final layer are being optimized as
 # opposed to before.
 # optimizer = torch.optim.SGD(model_conv.fc.parameters(), lr=0.001, momentum=0.9)
-optimizer = torch.optim.Adam(model_conv.fc.parameters(), lr=0.001)
+optimizer = torch.optim.Adam(
+    model_conv.fc.parameters(), lr=config["hyperparams"]["learning_rate"]
+)
 
 # Decay LR by a factor of 0.1 every 5 epochs
 lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-    optimizer, mode="min", factor=0.1, patience=5
+    optimizer,
+    mode="min",
+    factor=config["hyperparams"]["factor"],
+    patience=config["hyperparams"]["patience"],
 )
 
-numEpochs = 50
+numEpochs = config["hyperparams"]["num_epochs"]

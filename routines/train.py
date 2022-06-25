@@ -3,6 +3,9 @@ import torch.utils.data
 import time
 from .test import test_classify
 import numpy as np
+from datetime import datetime
+from config import config
+import os
 
 
 def train(
@@ -67,8 +70,13 @@ def train(
             print("Time:", end_time - start_time)
 
             # Save the order with min loss
+
             if val_loss < min_loss:
-                torch.save(model.state_dict(), "resnet_v3.pth")
+                now = datetime.now()
+                now_str = now.strftime("%m%d%Y-%H-%M")
+                model_string = f"resnet_{now_str}.pth"
+                folder = config["model"]["saved_models_folder"]
+                torch.save(model.state_dict(), os.path.join(folder, model_string))
                 min_loss = val_loss
                 print("Model saved at Val Loss:", val_loss)
                 print("=" * 40)
