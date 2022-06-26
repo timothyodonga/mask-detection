@@ -75,7 +75,8 @@ def train(
             if val_loss < min_loss:
                 now = datetime.now()
                 now_str = now.strftime("%m%d%Y-%H-%M")
-                model_string = f"resnet_{now_str}.pth"
+                model_type = config["model"]["model_type"]
+                model_string = f"{model_type}_{now_str}.pth"
                 folder = config["model"]["saved_models_folder"]
                 torch.save(model.state_dict(), os.path.join(folder, model_string))
                 min_loss = val_loss
