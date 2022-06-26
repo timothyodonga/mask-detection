@@ -1,8 +1,11 @@
 import torch
-from model.resnet import model_conv
+
+# from model.resnet import model_conv
 import torch.nn as nn
 import yaml
 import os
+from torchvision import models
+
 
 # folder to load config file
 CONFIG_PATH = "config"
@@ -20,6 +23,8 @@ config = load_config("config.yaml")
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # print(device)
+
+model_conv = models.__dict__["resnet18"](pretrained=True)
 
 for param in model_conv.parameters():
     param.requires_grad = False

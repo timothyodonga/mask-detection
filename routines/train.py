@@ -41,10 +41,10 @@ def train(
 
             avg_loss += loss.item()
 
-            if batch_num % 1000 == 999:
+            if batch_num % 100 == 99:
                 print(
                     "Epoch: {}\tBatch: {}\tAvg-Loss: {:.4f}".format(
-                        epoch + 1, batch_num + 1, avg_loss / 1000
+                        epoch + 1, batch_num + 1, avg_loss / 100
                     )
                 )
                 avg_loss = 0.0
