@@ -26,7 +26,7 @@ if load_flag:
         )
     )
 
-print(model_conv)
+# print(model_conv)
 
 
 def main():

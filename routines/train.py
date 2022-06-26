@@ -19,6 +19,7 @@ def train(
     lr_scheduler,
     task="Classification",
 ):
+    model.to(device)
     model.train()
     min_loss = np.inf
 

@@ -19,7 +19,7 @@ config = load_config("config.yaml")
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(device)
+# print(device)
 
 for param in model_conv.parameters():
     param.requires_grad = False
@@ -28,7 +28,7 @@ for param in model_conv.parameters():
 num_ftrs = model_conv.fc.in_features
 model_conv.fc = nn.Linear(num_ftrs, 2)
 
-model_conv = model_conv.to(device)
+# model_conv = model_conv.to(device)
 
 criterion = nn.CrossEntropyLoss()
 
@@ -43,8 +43,8 @@ optimizer = torch.optim.Adam(
 lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
     optimizer,
     mode="min",
-    factor=config["hyperparams"]["factor"],
-    patience=config["hyperparams"]["patience"],
+    factor=config["hyperparams"]["lr_scheduler"]["factor"],
+    patience=config["hyperparams"]["lr_scheduler"]["patience"],
 )
 
 numEpochs = config["hyperparams"]["num_epochs"]
