@@ -19,7 +19,9 @@ def main():
 
     if config["mode"] == "train":
 
-        train_data = TrainDataset(image_dir, data, transforms=get_transform(True))
+        train_data = TrainDataset(
+            image_dir, data, transforms=get_transform(mode="train")
+        )
 
         train_sampler, val_sampler = get_random_subset_sampler(
             len_train_data=len(train_data),
@@ -64,7 +66,9 @@ def main():
 
         print(model_conv)
 
-        testing_data = TestDataset(image_dir, test_data, transforms=get_transform(True))
+        testing_data = TestDataset(
+            image_dir, test_data, transforms=get_transform(mode="test")
+        )
 
         print(f"Length of test data: {len(testing_data)}")
         test_dataloader = torch.utils.data.DataLoader(
