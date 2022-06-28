@@ -3,6 +3,9 @@ import torch.utils.data
 import time
 from .test import test_classify
 import numpy as np
+from datetime import datetime
+from config import config
+import os
 
 
 def train(
@@ -16,6 +19,7 @@ def train(
     lr_scheduler,
     task="Classification",
 ):
+    model.to(device)
     model.train()
     min_loss = np.inf
 
@@ -37,10 +41,10 @@ def train(
 
             avg_loss += loss.item()
 
-            if batch_num % 1000 == 999:
+            if batch_num % 100 == 99:
                 print(
                     "Epoch: {}\tBatch: {}\tAvg-Loss: {:.4f}".format(
-                        epoch + 1, batch_num + 1, avg_loss / 1000
+                        epoch + 1, batch_num + 1, avg_loss / 100
                     )
                 )
                 avg_loss = 0.0
@@ -67,8 +71,14 @@ def train(
             print("Time:", end_time - start_time)
 
             # Save the order with min loss
+
             if val_loss < min_loss:
-                torch.save(model.state_dict(), "resnet_v3.pth")
+                now = datetime.now()
+                now_str = now.strftime("%m%d%Y-%H-%M")
+                model_type = config["model"]["model_type"]
+                model_string = f"{model_type}_{now_str}.pth"
+                folder = config["model"]["saved_models_folder"]
+                torch.save(model.state_dict(), os.path.join(folder, model_string))
                 min_loss = val_loss
                 print("Model saved at Val Loss:", val_loss)
                 print("=" * 40)

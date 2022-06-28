@@ -1,4 +1,3 @@
-*.ipynb
 .vscode/
 data/*
 debug.*
@@ -7,3 +6,6 @@ debug.*
 *.pyc
 *.pth
 debug_*
+test_test.ipynb
+test_train.ipynb
+output_*.csv
