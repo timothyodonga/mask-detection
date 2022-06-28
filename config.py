@@ -24,7 +24,9 @@ config = load_config("config.yaml")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # print(device)
 
-model_conv = models.__dict__["resnet18"](pretrained=True)
+model_conv = models.__dict__[config["model"]["model_type"]](
+    pretrained=config["model"]["pretrained"]
+)
 
 for param in model_conv.parameters():
     param.requires_grad = False

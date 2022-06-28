@@ -24,7 +24,7 @@ class SaveValues:
 
 
 class CAM(object):
-    """ Class Activation Mapping """
+    """Class Activation Mapping"""
 
     def __init__(self, model, target_layer):
         """
@@ -91,7 +91,7 @@ class CAM(object):
 
 
 class GradCAM(CAM):
-    """ Grad CAM """
+    """Grad CAM"""
 
     def __init__(self, model, target_layer):
         super().__init__(model, target_layer)
@@ -159,7 +159,7 @@ class GradCAM(CAM):
 
 
 class GradCAMpp(CAM):
-    """ Grad CAM plus plus """
+    """Grad CAM plus plus"""
 
     def __init__(self, model, target_layer):
         super().__init__(model, target_layer)
@@ -236,7 +236,7 @@ class GradCAMpp(CAM):
 
 
 class SmoothGradCAMpp(CAM):
-    """ Smooth Grad CAM plus plus """
+    """Smooth Grad CAM plus plus"""
 
     def __init__(self, model, target_layer, n_samples=25, stdev_spread=0.15):
         super().__init__(model, target_layer)
